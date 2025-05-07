@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Special_Elite, Monoton } from "next/font/google";
+import { Special_Elite } from "next/font/google";
 import { Providers } from "./providers";
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -9,10 +9,6 @@ const specialElite = Special_Elite({
   subsets: ['latin'],
   weight: '400',
 });
-
-const monoton = Monoton({
-  weight: '400'
-})
 
 export const metadata: Metadata = {
   title: "Home - Danielle Jackson",
