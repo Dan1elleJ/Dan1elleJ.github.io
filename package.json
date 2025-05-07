@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "npm run build && gh-pages -d out -t \"Deploy to GitHub Pages\""
+    "deploy": "npm run build && cp .nojekyll out/ && gh-pages -d out"
   },
   "dependencies": {
     "@heroui/react": "^2.7.8",
