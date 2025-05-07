@@ -45,7 +45,7 @@ function ImageGrid({ images }: ImageGridProps) {
 
       {isModalOpen && selectedImage && (
         <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-80 z-50 flex justify-center items-center">
-          <div className="relative bg-white rounded-md p-8 max-w-3xl max-h-screen overflow-auto">
+          <div className="relative bg-[#FEF3E2] rounded-md p-8 max-w-3xl max-h-screen overflow-auto">
             <button
               onClick={closeModal}
               className="absolute top-2 right-2 focus:outline-none rounded-full w-6 h-6 flex items-center justify-center text-black"

@@ -4,27 +4,27 @@ import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button} from "@her
 
 function Header() {
   return (
-    <Navbar>
+    <Navbar className="text-[#FA812F] bg-[#FEF3E2]">
       <NavbarBrand>
-        <p className="font-bold text-inherit">danielle jackson</p>
+        <p className="font-bold">danielle jackson</p>
       </NavbarBrand>
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarItem>
-          <Link color="foreground" href="#artwork">
+          <Link className="text-inherit" href="#artwork">
             Gallery
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" href="#about">
+          <Link className="text-inherit" href="#about">
             About Me
           </Link>
         </NavbarItem>
       </NavbarContent>
       <NavbarContent className="hidden sm:flex gap-4" justify="end">
         <NavbarItem>
-          <Button isIconOnly aria-label="Instagram" className="rounded-full bg-gray-100 hover:bg-gray-200" as="a" href="https://www.instagram.com">
+          <Button isIconOnly aria-label="Instagram" className="rounded-full bg-[#FA812F] hover:bg-[#FEF32]" as="a" href="https://www.instagram.com">
             <svg width="150" height="100">
-              <svg width="100%" height="100%" fill="#000000" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+              <svg width="100%" height="100%" fill="#FEF3E2" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
                 <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                 <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
                 <g id="SVGRepo_iconCarrier">
@@ -36,9 +36,9 @@ function Header() {
           </Button>
         </NavbarItem>
         <NavbarItem>
-          <Button isIconOnly aria-label="LinkedIn" className="rounded-full bg-gray-100 hover:bg-gray-200"  as="a" href="https://www.linkedin.com">
+          <Button isIconOnly aria-label="LinkedIn" className="rounded-full bg-[#FA812F] hover:hover:bg-[#FEF32]"  as="a" href="https://www.linkedin.com">
           <svg width="200" height="100">
-            <svg width="100%" height="100%" fill="#000000" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" >
+            <svg width="100%" height="100%" fill="#FEF3E2" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" >
               <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
               <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
               <g id="SVGRepo_iconCarrier">

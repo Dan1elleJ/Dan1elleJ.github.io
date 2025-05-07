@@ -19,7 +19,7 @@ body {
 body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-  font-family: var(--font-inter), sans-serif; /* Default body font */
+  font-family: 'Special Elite';
 }
 
 img,
@@ -44,7 +44,5 @@ h6 {
 
 h1,
 h2 {
-  font-family: var(--font-merriweather), serif;
-  font-weight: bold;
   color: #fa812f; /* Example heading color */
 }

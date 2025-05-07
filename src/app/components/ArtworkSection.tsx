@@ -35,9 +35,9 @@ const grid2Images = [
   { src: '/images/photography_10.jpg', alt: 'Artwork from Grid 2 - 10' },
   { src: '/images/photography_11.jpg', alt: 'Artwork from Grid 2 - 11' },
   { src: '/images/photography_12.jpg', alt: 'Artwork from Grid 2 - 12' },
-  { src: '/images/photography_13.jpg', alt: 'Artwork from Grid 2 - 10' },
-  { src: '/images/photography_14.jpg', alt: 'Artwork from Grid 2 - 11' },
-  { src: '/images/photography_15.jpg', alt: 'Artwork from Grid 2 - 12' },
+  { src: '/images/photography_13.jpg', alt: 'Artwork from Grid 2 - 13' },
+  { src: '/images/photography_14.jpg', alt: 'Artwork from Grid 2 - 14' },
+  { src: '/images/photography_15.jpg', alt: 'Artwork from Grid 2 - 15' },
 ];
 
 const grid3Images = [
@@ -82,10 +82,10 @@ function ArtworkSection() {
     <section id="artwork" className={styles.artworkSection}>
       <h2 className={styles.heading}>Gallery</h2>
       <div className="flex w-full flex-col items-center">
-      <Tabs aria-label="Dynamic tabs" items={tabs}>
+      <Tabs aria-label="Dynamic Tabs" items={tabs} radius="full" color='warning'>
         {(item) => (
           <Tab key={item.id} title={item.label}>
-            <Card>
+            <Card className='bg-[#FEF3E2] border-[#FA812F] border-2'>
               <CardBody>{item.content}</CardBody>
             </Card>
           </Tab>
