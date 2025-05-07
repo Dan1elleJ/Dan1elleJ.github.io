@@ -59,7 +59,7 @@ const grid3Images = [
 ];
 
 
-let tabs = [
+const tabs = [
   {
     id: "grid1",
     label: "Print Making",
