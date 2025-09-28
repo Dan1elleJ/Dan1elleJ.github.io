@@ -7,17 +7,19 @@
 
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { X } from 'lucide-react';
+import { X, Play } from 'lucide-react';
 
-// TypeScript interface for individual image objects
-interface Image {
-  src: string;  // Path to image file
-  alt: string;  // Alternative text for accessibility
+// TypeScript interface for individual media objects (images and videos)
+interface MediaItem {
+  src: string;        // Path to grid thumbnail image
+  modalSrc: string;   // Path to larger modal image/video
+  alt: string;        // Alternative text for accessibility
+  type: 'image' | 'video';  // Media type
 }
 
 // TypeScript interface for component props
 interface ImageGridProps {
-  images: Image[];  // Array of images to display in the grid
+  images: MediaItem[];  // Array of media items to display in the grid
   categoryName?: string;  // Optional category name for modal header
 }
 
@@ -35,16 +37,16 @@ interface ImageGridProps {
 function ImageGrid({ images, categoryName }: ImageGridProps) {
   // State management for modal functionality
   const [isModalOpen, setIsModalOpen] = useState(false);           // Controls modal visibility
-  const [selectedImage, setSelectedImage] = useState<Image | null>(null);  // Currently viewed image
+  const [selectedImage, setSelectedImage] = useState<MediaItem | null>(null);  // Currently viewed media
   const [imagesLoaded, setImagesLoaded] = useState(false);         // Track if images are preloaded
   const [imageErrors, setImageErrors] = useState<Set<string>>(new Set()); // Track failed images
 
   /**
-   * Opens modal with selected image
-   * @param image - Image object to display in modal
+   * Opens modal with selected media
+   * @param media - Media object to display in modal
    */
-  const openModal = (image: Image) => {
-    setSelectedImage(image);
+  const openModal = (media: MediaItem) => {
+    setSelectedImage(media);
     setIsModalOpen(true);
   };
 
@@ -173,15 +175,26 @@ function ImageGrid({ images, categoryName }: ImageGridProps) {
               </div>
             </div>
           ) : (
-            /* Optimized img tag */
-            <img
-              src={image.src}
-              alt={image.alt}
-              className="w-full h-full object-cover transition-all duration-300"
-              loading="lazy"
-              decoding="async"
-              onError={() => setImageErrors(prev => new Set(prev).add(image.src))}
-            />
+            <>
+              {/* Optimized img tag */}
+              <img
+                src={image.src}
+                alt={image.alt}
+                className="w-full h-full object-cover transition-all duration-300"
+                loading="lazy"
+                decoding="async"
+                onError={() => setImageErrors(prev => new Set(prev).add(image.src))}
+              />
+
+              {/* Add play icon overlay for videos */}
+              {image.type === 'video' && (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="bg-black/50 rounded-full p-3">
+                    <Play className="text-white w-8 h-8" fill="white" />
+                  </div>
+                </div>
+              )}
+            </>
           )}
         </div>
       ))}
@@ -189,9 +202,9 @@ function ImageGrid({ images, categoryName }: ImageGridProps) {
       {/* Modal portal - renders at document root */}
       {isModalOpen && selectedImage && typeof window !== 'undefined' &&
         createPortal(
-          <div className="fixed inset-0 bg-black bg-opacity-80 z-[9999] flex justify-center items-center p-8">
+          <div className="fixed inset-0 bg-black bg-opacity-80 z-[9999] flex justify-center items-center p-4 sm:p-6 md:p-8">
             {/* Modal content container */}
-            <div className="relative bg-secondary rounded-xl shadow-2xl w-full max-w-4xl max-h-[75vh] flex flex-col overflow-hidden">
+            <div className="relative bg-secondary rounded-xl shadow-2xl w-auto max-w-4xl max-h-[90vh] flex flex-col overflow-hidden">
               {/* Modal header with close button */}
               <div className="relative flex justify-center items-center px-4 sm:px-6 py-4 sm:py-5 bg-secondary flex-shrink-0 rounded-t-xl">
                 <h3 className="text-base sm:text-lg md:text-xl font-semibold text-primary text-center">
@@ -212,13 +225,22 @@ function ImageGrid({ images, categoryName }: ImageGridProps) {
                 </button>
               </div>
 
-              {/* Image container with minimal top padding */}
-              <div className="flex justify-center items-center bg-secondary pt-1 px-4 pb-4 sm:pt-1 sm:px-6 sm:pb-6 md:pt-2 md:px-8 md:pb-8 flex-1 min-h-0 overflow-hidden rounded-b-xl">
-                <img
-                  src={selectedImage.src}
-                  alt={selectedImage.alt}
-                  className="max-w-[90%] max-h-[90%] object-contain rounded shadow-lg border-2 border-primary"
-                />
+              {/* Image container with balanced spacing */}
+              <div className="flex justify-center items-center bg-secondary pt-0 pb-4 px-4 sm:pt-0 sm:pb-6 sm:px-6 md:pt-0 md:pb-8 md:px-8 flex-1 min-h-0 rounded-b-xl overflow-hidden">
+                {selectedImage.type === 'video' ? (
+                  <video
+                    src={selectedImage.modalSrc}
+                    controls
+                    autoPlay
+                    className="max-w-full max-h-full object-contain rounded shadow-lg border-2 border-primary"
+                  />
+                ) : (
+                  <img
+                    src={selectedImage.modalSrc}
+                    alt={selectedImage.alt}
+                    className="max-w-full max-h-full object-contain rounded shadow-lg border-2 border-primary"
+                  />
+                )}
               </div>
             </div>
           </div>,

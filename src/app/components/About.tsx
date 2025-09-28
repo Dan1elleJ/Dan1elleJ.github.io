@@ -34,7 +34,7 @@ function About() {
         {/* Portrait photo with HeroUI Image component */}
         <Image
           alt="Danielle"                        // Accessibility description
-          src="/images/danielle.jpg.original"   // Path to original uncompressed portrait photo
+          src="/images/danielle.jpg"            // Path to portrait photo
           className='border-2 border-primary rounded-lg shadow-lg flex-shrink-0 w-48 sm:w-56 md:w-64 lg:w-72 xl:w-80 aspect-[3/4] object-cover' // Responsive sizing with correct 3:4 aspect ratio
         />
       </div>
