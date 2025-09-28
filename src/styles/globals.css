@@ -76,18 +76,21 @@ html, body {
   display: grid;
   grid-template-columns: 1fr;
   gap: 0.5rem;
+  min-height: 400px; /* Prevent grid collapse during transitions */
 }
 
 @media (min-width: 640px) {
   .safari-explicit-grid {
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
+    min-height: 600px; /* Larger min-height for 2-column layout */
   }
 }
 
 @media (min-width: 1024px) {
   .safari-explicit-grid {
     grid-template-columns: 1fr 1fr 1fr;
+    min-height: 800px; /* Larger min-height for 3-column layout */
   }
 }
 

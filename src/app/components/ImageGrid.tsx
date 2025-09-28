@@ -86,43 +86,30 @@ function ImageGrid({ images, categoryName }: ImageGridProps) {
     });
   };
 
-  // Preload images when component mounts or images change
+  // Initialize image errors and preload images when component mounts
   useEffect(() => {
-    let loadedCount = 0;
-    const totalImages = images.length;
-
-    const handleImageLoad = () => {
-      loadedCount++;
-      if (loadedCount === totalImages) {
-        setImagesLoaded(true);
-      }
-    };
-
-    const handleImageError = (src: string) => {
-      console.warn(`Failed to load image: ${src}`);
-      setImageErrors(prev => new Set(prev).add(src));
-      loadedCount++;
-      if (loadedCount === totalImages) {
-        setImagesLoaded(true);
-      }
-    };
-
-    // Reset loading state when images change
-    setImagesLoaded(false);
     setImageErrors(new Set());
+    setImagesLoaded(false);
 
     // Preload all images
-    images.forEach(image => {
-      const img = new Image();
-      img.onload = handleImageLoad;
-      img.onerror = () => handleImageError(image.src);
-      img.src = image.src;
-    });
+    const imagePromises = images
+      .filter(item => item.type === 'image')
+      .map((image) => {
+        return new Promise<void>((resolve) => {
+          const img = new Image();
+          img.onload = () => resolve();
+          img.onerror = () => {
+            setImageErrors(prev => new Set(prev).add(image.src));
+            resolve(); // Still resolve to not block other images
+          };
+          img.src = image.src;
+        });
+      });
 
-    // Cleanup function
-    return () => {
-      setImagesLoaded(false);
-    };
+    // When all images are loaded, show the grid
+    Promise.all(imagePromises).then(() => {
+      setImagesLoaded(true);
+    });
   }, [images]);
 
   // Handle scroll lock when modal is open (coordinated with closeModal)
@@ -158,7 +145,7 @@ function ImageGrid({ images, categoryName }: ImageGridProps) {
 
 
   return (
-    <div className={`safari-explicit-grid transition-opacity duration-300 ${imagesLoaded ? 'opacity-100' : 'opacity-0'}`}>  {/* Responsive grid with explicit Safari support and fade-in */}
+    <div className={`safari-explicit-grid transition-opacity duration-500 ${imagesLoaded ? 'opacity-100' : 'opacity-0'}`}>  {/* Responsive grid with explicit Safari support */}
       {/* Render each image in the grid */}
       {images.map((image, index) => (
         <div
