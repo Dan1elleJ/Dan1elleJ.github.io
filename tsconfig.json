@@ -1,27 +1,68 @@
 {
+  // TypeScript Configuration for Next.js Project
+  // This configures TypeScript compilation settings and file inclusion rules
   "compilerOptions": {
+    // Target ES2017 for good browser support while maintaining modern features
     "target": "ES2017",
+
+    // Include DOM types for browser APIs and ESNext for latest JavaScript features
     "lib": ["dom", "dom.iterable", "esnext"],
+
+    // Allow JavaScript files to be imported into TypeScript files
     "allowJs": true,
+
+    // Skip type checking of declaration files for faster compilation
     "skipLibCheck": true,
+
+    // Enable strict type checking for better code quality
     "strict": true,
+
+    // Don't emit JavaScript files (Next.js handles this)
     "noEmit": true,
+
+    // Enable interop between CommonJS and ES modules
     "esModuleInterop": true,
+
+    // Use ESNext module system for modern import/export
     "module": "esnext",
+
+    // Use bundler module resolution (optimized for webpack/Next.js)
     "moduleResolution": "bundler",
+
+    // Allow importing JSON files as modules
     "resolveJsonModule": true,
+
+    // Ensure each file can be transpiled independently
     "isolatedModules": true,
+
+    // Preserve JSX syntax for Next.js to handle
     "jsx": "preserve",
+
+    // Enable incremental compilation for faster builds
     "incremental": true,
+
+    // Next.js TypeScript plugin for enhanced IDE support
     "plugins": [
       {
         "name": "next"
       }
     ],
+
+    // Path aliases for cleaner imports
     "paths": {
+      // Map @/* to src/* for shorter import paths
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+
+  // Files to include in TypeScript compilation
+  "include": [
+    "next-env.d.ts",           // Next.js type definitions
+    "**/*.ts",                // All TypeScript files
+    "**/*.tsx",               // All TypeScript React files
+    ".next/types/**/*.ts"      // Generated Next.js types
+  ],
+
+  // Directories to exclude from compilation
   "exclude": ["node_modules"]
 }

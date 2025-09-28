@@ -42,3 +42,6 @@ next-env.d.ts
 
 # Editor and IDE related files
 .vscode/
+
+# Project documentation (personal reference)
+PROJECT_OVERVIEW.md

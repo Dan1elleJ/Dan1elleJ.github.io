@@ -1,37 +1,48 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/**
+ * Global Stylesheet
+ *
+ * Contains global styles, CSS reset, and base typography for the portfolio site.
+ * Integrates Tailwind CSS utilities with custom styling for consistent design.
+ */
 
-/* CSS Reset */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+/* Import Tailwind CSS layers */
+@tailwind base;       /* Reset styles and base element styling */
+@tailwind components; /* Reusable component classes */
+@tailwind utilities;  /* Utility classes for quick styling */
+
+:root {
+  --color-primary: #FA812F;
+  --color-secondary: #FEF3E2;
+  --color-dark: #C14600;
+  --color-text: #333333;
 }
 
-html,
+/* Smooth scrolling for anchor links */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Base body styling */
 body {
-  height: 100%;
+  line-height: 1.5;                    /* Improved text readability */
+  -webkit-font-smoothing: antialiased; /* Better font rendering on WebKit browsers */
+  -moz-osx-font-smoothing: grayscale;  /* ← Add Firefox smoothing */
+  font-family: 'Special Elite', monospace, sans-serif;        /* Apply Special Elite font globally */
+  padding-top: 64px;                   /* Add padding for fixed navbar */
 }
 
-body {
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-  font-family: 'Special Elite';
+/* Improve image performance and accessibility */
+img {
+  font-style: italic;  /* Shows alt text in italics while loading */
 }
 
-img,
-picture,
-video,
-canvas,
-svg {
-  display: block;
-  max-width: 100%;
-  height: auto;
+/* Better focus outline for accessibility */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
 }
 
+/* Typography improvements */
 p,
 h1,
 h2,
@@ -39,10 +50,49 @@ h3,
 h4,
 h5,
 h6 {
-  overflow-wrap: break-word;
+  overflow-wrap: break-word;  /* Prevent long words from breaking layout */
 }
 
+/* Global heading styles - matching site color scheme */
 h1,
 h2 {
-  color: #fa812f; /* Example heading color */
+  color: var(--color-primary);  /* Orange color for all main headings */
+}
+
+/* Prevent horizontal scrolling */
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+/* Ensure all elements stay within viewport */
+* {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Explicit Safari grid fix */
+.safari-explicit-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+}
+
+@media (min-width: 640px) {
+  .safari-explicit-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .safari-explicit-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+/* Safari container consistency fix - flexible for mixed aspect ratios */
+.safari-explicit-grid > div {
+  height: auto; /* Let images determine their own height */
+  min-height: 200px; /* Ensure consistent minimum height */
 }

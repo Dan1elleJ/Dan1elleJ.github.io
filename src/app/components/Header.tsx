@@ -1,55 +1,82 @@
-'use client'
+/**
+ * Header Component
+ *
+ * Site navigation header with branding, navigation links, and social media buttons.
+ * Uses HeroUI Navbar components with custom orange/cream color scheme.
+ */
+
+'use client'  // Required for interactive components in Next.js App Router
 
 import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button} from "@heroui/react";
 
+/**
+ * Header Function Component
+ *
+ * Creates a responsive navigation bar with:
+ * - Artist name/brand on the left
+ * - Navigation links in the center (hidden on mobile)
+ * - Social media buttons on the right (hidden on mobile)
+ */
 function Header() {
   return (
-    <Navbar className="text-[#FA812F] bg-[#FEF3E2]">
+    <div className="fixed top-0 left-0 right-0 z-50">
+      <Navbar className="text-[#FA812F] bg-[#FEF3E2] w-full">  {/* Orange text on cream background */}
+      {/* Left side - Artist branding */}
       <NavbarBrand>
-        <p className="font-bold">danielle jackson</p>
+        <p className="font-bold text-sm sm:text-base md:text-lg">danielle jackson</p>
       </NavbarBrand>
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
+
+      {/* Center - Navigation links (hidden on small screens) */}
+      <NavbarContent className="hidden sm:flex gap-3 md:gap-4 lg:gap-6" justify="center">
         <NavbarItem>
-          <Link className="text-inherit" href="#artwork">
+          {/* Smooth scroll to artwork section */}
+          <Link className="text-inherit text-sm md:text-base lg:text-lg hover:text-dark transition-colors" href="#artwork">
             Gallery
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link className="text-inherit" href="#about">
+          {/* Smooth scroll to about section */}
+          <Link className="text-inherit text-sm md:text-base lg:text-lg hover:text-dark transition-colors" href="#about">
             About Me
           </Link>
         </NavbarItem>
       </NavbarContent>
-      <NavbarContent className="hidden sm:flex gap-4" justify="end">
+
+      {/* Right side - Social media buttons (visible on all screens) */}
+      <NavbarContent className="flex gap-4" justify="end">
         <NavbarItem>
-          <Button isIconOnly aria-label="Instagram" className="rounded-full bg-[#FA812F] hover:bg-[#FEF32]" as="a" href="https://www.instagram.com">
-            <svg width="150" height="100">
-              <svg width="100%" height="100%" fill="#FEF3E2" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-                <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-                <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
-                <g id="SVGRepo_iconCarrier">
-                  <path d="M20.445 5h-8.891A6.559 6.559 0 0 0 5 11.554v8.891A6.559 6.559 0 0 0 11.554 27h8.891a6.56 6.56 0 0 0 6.554-6.555v-8.891A6.557 6.557 0 0 0 20.445 5zm4.342 15.445a4.343 4.343 0 0 1-4.342 4.342h-8.891a4.341 4.341 0 0 1-4.341-4.342v-8.891a4.34 4.34 0 0 1 4.341-4.341h8.891a4.342 4.342 0 0 1 4.341 4.341l.001 8.891z"></path>
-                  <path d="M16 10.312c-3.138 0-5.688 2.551-5.688 5.688s2.551 5.688 5.688 5.688 5.688-2.551 5.688-5.688-2.55-5.688-5.688-5.688zm0 9.163a3.475 3.475 0 1 1-.001-6.95 3.475 3.475 0 0 1 .001 6.95zM21.7 8.991a1.363 1.363 0 1 1-1.364 1.364c0-.752.51-1.364 1.364-1.364z"></path>
-                </g>
-              </svg>
+          <Button
+            isIconOnly
+            aria-label="Instagram"
+            className="rounded-full bg-primary hover:bg-dark w-10 h-10"
+            as="a"
+            href="https://www.instagram.com/danielle___jackson"
+          >
+            {/* Clean Instagram SVG icon */}
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className="text-secondary">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
             </svg>
           </Button>
         </NavbarItem>
+
         <NavbarItem>
-          <Button isIconOnly aria-label="LinkedIn" className="rounded-full bg-[#FA812F] hover:hover:bg-[#FEF32]"  as="a" href="https://www.linkedin.com">
-          <svg width="200" height="100">
-            <svg width="100%" height="100%" fill="#FEF3E2" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" >
-              <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-              <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
-              <g id="SVGRepo_iconCarrier">
-                <path d="M116.504,500.219V170.654H6.975v329.564H116.504 L116.504,500.219z M61.751,125.674c38.183,0,61.968-25.328,61.968-56.953c-0.722-32.328-23.785-56.941-61.252-56.941 C24.994,11.781,0.5,36.394,0.5,68.722c0,31.625,23.772,56.953,60.53,56.953H61.751L61.751,125.674z M177.124,500.219 c0,0,1.437-298.643,0-329.564H286.67v47.794h-0.727c14.404-22.49,40.354-55.533,99.44-55.533 c72.085,0,126.116,47.103,126.116,148.333v188.971H401.971V323.912c0-44.301-15.848-74.531-55.497-74.531 c-30.254,0-48.284,20.38-56.202,40.08c-2.897,7.012-3.602,16.861-3.602,26.711v184.047H177.124L177.124,500.219z"></path>
-              </g>
+          <Button
+            isIconOnly
+            aria-label="LinkedIn"
+            className="rounded-full bg-primary hover:bg-dark w-10 h-10"
+            as="a"
+            href="http://www.linkedin.com/in/danielle-jackson-94011b384"
+          >
+            {/* Clean LinkedIn SVG icon */}
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className="text-secondary">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
             </svg>
-          </svg>
           </Button>
         </NavbarItem>
       </NavbarContent>
     </Navbar>
+    </div>
   );
 }
+
 export default Header;
